@@ -28,6 +28,23 @@ class App extends React.Component {
                 id: 1003
             }
         ];
+
+        this.state.playlistName = { name: 'Codeacademy Playlist'};
+
+        this.state.playlistTracks = [
+            {
+                name: 'Dura',
+                artist: 'Daddy Yankee',
+                album: 'Latin Fever Mixtape',
+                id: 1002
+            },
+            {
+                name: 'I like It',
+                artist: 'cardi B',
+                album: 'Invasion of Privacy',
+                id: 1003
+            }
+        ];
     }
 
     render() {
@@ -38,7 +55,7 @@ class App extends React.Component {
                     <SearchBar />
                     <div className="App-playlist">
                     <SearchResults searchResults={this.state.searchResults}/>
-                    <Playlist />
+                    <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} />
                     </div>
                 </div>
             </div>
