@@ -9,8 +9,8 @@ import Spotify from '../../util/Spotify';
 class App extends React.Component {
     constructor(props) {
         super(props);
-        //this.state = {searchResults: [], playlistName: '', playlistTracks: []};
-        this.state = {
+        this.state = {searchResults: [], playlistName: '', playlistTracks: []};
+        /*this.state = {
             searchResults: [
                 {
                     name: 'Nice For What',
@@ -46,7 +46,7 @@ class App extends React.Component {
                     id: 1003
                 }
             ]
-        };
+        };*/
 
         this.addTrack = this.addTrack.bind(this);
         this.removeTrack =this.removeTrack.bind(this);
@@ -78,7 +78,6 @@ class App extends React.Component {
         this.state.playlistTracks.forEach(track => {
             trackURIs.push(track.uri);
         });
-
         this.setState({  });
     }
 
@@ -92,7 +91,7 @@ class App extends React.Component {
         return (
             <div>
                 <h1>Ja<span className="highlight">mmm</span>ing</h1>
-                <div class="App">
+                <div className="App">
                     <SearchBar onSearch={this.search}/>
                     <div className="App-playlist">
                     <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />

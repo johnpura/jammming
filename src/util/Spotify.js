@@ -24,8 +24,9 @@ const Spotify = {
         }
     },
     search(searchTerm) {
+        accessToken = this.getAccessToken();
         const endpoint = `https://api.spotify.com/v1/search?type=track&q=${searchTerm}`;
-        const header = {headers: {Authorization: `Bearer ${accessToken}`}};
+        const header = { headers: {Authorization: `Bearer ${accessToken}`} };
 
         fetch(endpoint, header).then(response => {
             if(response.ok) {
@@ -34,20 +35,41 @@ const Spotify = {
             throw new Error('Unable to search Spotify library. GET request failed!');
         }, networkError => console.log(networkError.message).then(jsonResponse => {
             if(jsonResponse.tracks) {
-                let spotifyTracks = jsonResponse.tracks.items.map(track => {
+                return jsonResponse.tracks.items.map(track => (
                     {
-                        id = track.id,
-                        name = track.name;
-                        artist = track.artists[0].name,
-                        album = track.album.name,
-                        uri = track.uri
+                        id: track.id,
+                        name: track.name,
+                        artist: track.artists[0].name,
+                        album: track.album.name,
+                        uri: track.uri
                     }
-                });
-                return spotifyTracks;
+                ));
             } else {
                 return [];
             }
         }));
+    },
+    savePlaylist (playlistName, trackURIs) {
+        
+        if (playlistName && trackURIs) {
+            let userID = '';
+            let token = this.getAccessToken();
+            const headers = {Authorization: `Bearer ${token}`};
+            const endpoint = 'https://api.spotify.com/v1/me';
+
+            fetch(endpoint, headers).then(response => {
+                if(response.ok) {
+                    return response.json();
+                }
+                throw new Error('Unable to retrieve user ID. Request failed!');
+            }, networkError => console.log(networkError.message)
+            ).then(jsonResponse => {
+                userID = jsonResponse.id;
+            });
+            console.log(userID); 
+        } else {
+            return;
+        }
     }
 };
 
