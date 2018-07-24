@@ -24,16 +24,15 @@ const Spotify = {
         }
     },
     search(searchTerm) {
-        accessToken = this.getAccessToken();
+        accessToken = Spotify.getAccessToken();
         const endpoint = `https://api.spotify.com/v1/search?type=track&q=${searchTerm}`;
         const header = { headers: {Authorization: `Bearer ${accessToken}`} };
 
-        fetch(endpoint, header).then(response => {
+        return fetch(endpoint, header).then(response => {
             if(response.ok) {
                 return response.json();
             }
-            throw new Error('Unable to search Spotify library. GET request failed!');
-        }, networkError => console.log(networkError.message).then(jsonResponse => {
+        }).then(jsonResponse => {
             if(jsonResponse.tracks) {
                 return jsonResponse.tracks.items.map(track => (
                     {
@@ -47,7 +46,7 @@ const Spotify = {
             } else {
                 return [];
             }
-        }));
+        });
     },
     savePlaylist (playlistName, trackURIs) {
         
