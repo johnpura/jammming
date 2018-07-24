@@ -9,45 +9,7 @@ import Spotify from '../../util/Spotify';
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {searchResults: [], playlistName: '', playlistTracks: []};
-        /*this.state = {
-            searchResults: [
-                {
-                    name: 'Nice For What',
-                    artist: 'Drake',
-                    album: 'Scorpion',
-                    id: 1001
-                },
-                {
-                    name: 'Dura',
-                    artist: 'Daddy Yankee',
-                    album: 'Latin Fever Mixtape',
-                    id: 1002
-                },
-                {
-                    name: 'I like It',
-                    artist: 'Cardi B',
-                    album: 'Invasion of Privacy',
-                    id: 1003
-                }
-            ],
-            playlistName: 'Codeacademy Playlist',
-            playlistTracks: [
-                {
-                    name: 'Dura',
-                    artist: 'Daddy Yankee',
-                    album: 'Latin Fever Mixtape',
-                    id: 1002
-                },
-                {
-                    name: 'I like It',
-                    artist: 'Cardi B',
-                    album: 'Invasion of Privacy',
-                    id: 1003
-                }
-            ]
-        };*/
-
+        this.state = {searchResults: [], playlistName: 'New Playlist', playlistTracks: []};
         this.addTrack = this.addTrack.bind(this);
         this.removeTrack =this.removeTrack.bind(this);
         this.updatePlaylistName = this.updatePlaylistName.bind(this);
