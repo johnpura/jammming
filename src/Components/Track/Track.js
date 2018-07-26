@@ -34,7 +34,7 @@ class Track extends React.Component {
                 </div>
                 {this.renderAction()}
             </div>
-        );
+        )
     }
 }
 
