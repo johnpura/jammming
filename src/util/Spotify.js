@@ -1,7 +1,8 @@
 let accessToken = '';
 let expiresIn = '';
 const clientID = '65dfb9d3e7ca48cb8970fe691da957cf';
-const redirectURI = 'https://myjammming.surge.sh';
+const redirectURI = 'http://localhost:3000/';
+const scopes = 'playlist-modify-public user-modify-playback-state';
 
 const Spotify = {
     getAccessToken() {
@@ -20,7 +21,7 @@ const Spotify = {
                 window.history.pushState('Access Token', null, '/');
                 return accessToken;
             } else {
-                window.location = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectURI}`;
+                window.location = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=token&scope=${encodeURIComponent(scopes)}&redirect_uri=${redirectURI}`;
             }
         }
     },
@@ -80,6 +81,22 @@ const Spotify = {
         } else {
             return;
         }
+    },
+    playTrack(trackURI) {
+        accessToken = Spotify.getAccessToken();
+        const endpoint = 'https://api.spotify.com/v1/me/player/play';
+        const options = { 
+            headers: {
+                        Authorization: `Bearer ${accessToken}`, 
+                        "Content-Type": 'application/json'
+                    }, 
+            method: 'PUT', 
+            body: JSON.stringify({ context_uri: trackURI})
+        };
+        return fetch(endpoint, options);
+    },
+    pauseTrack(track) {
+
     }
 };
 

@@ -12,6 +12,8 @@ class SearchResults extends React.Component {
                     tracks={this.props.searchResults} 
                     isRemoval={false} 
                     onAdd={this.props.onAdd}
+                    onPlay={this.props.onPlay}
+                    onPause={this.props.onPause}
                 />
             </div>
         )

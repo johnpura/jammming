@@ -32,4 +32,10 @@
     font-weight: 300;
     color: rgba(256, 256, 256, 0.8);
   }
+
+  .Playback-action {
+    cursor: pointer;
+    padding: .5rem;
+    transition: color .25s;
+  }
   

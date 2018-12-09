@@ -15,6 +15,8 @@ class App extends React.Component {
         this.updatePlaylistName = this.updatePlaylistName.bind(this);
         this.savePlaylist = this.savePlaylist.bind(this);
         this.search = this.search.bind(this);
+        this.playTrack = this.playTrack.bind(this);
+        this.pauseTrack = this.pauseTrack.bind(this);
     }
 
     addTrack(track) {
@@ -50,6 +52,15 @@ class App extends React.Component {
         });
     }
 
+    playTrack(trackURI) {
+        //Spotify.playTrack(trackURI);
+        return alert(`Playing Track: ${trackURI}`);
+    }
+
+    pauseTrack(trackURI) {
+        return alert(`Paused Track. ${trackURI}`);
+    }
+
     render() {
         return (
             <div>
@@ -57,14 +68,16 @@ class App extends React.Component {
                 <div className="App">
                     <SearchBar onSearch={this.search}/>
                     <div className="App-playlist">
-                    <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
+                    <SearchResults searchResults={this.state.searchResults} 
+                                   onAdd={this.addTrack} 
+                                   onPlay={this.playTrack} 
+                                   onPause={this.pauseTrack} />
                     <Playlist 
                         playlistName={this.state.playlistName} 
                         playlistTracks={this.state.playlistTracks}
                         onRemove={this.removeTrack}
                         onNameChange={this.updatePlaylistName}
-                        onSave={this.savePlaylist}
-                    />
+                        onSave={this.savePlaylist} />
                     </div>
                 </div>
             </div>
